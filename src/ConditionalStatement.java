@@ -28,11 +28,17 @@ public class ConditionalStatement {
     public static String numRange(int number, Boolean oddEven){
 
         String x;
+        String num = String.valueOf(number);
 
         //Changes output if the number is odd or even
         if(oddEven == false){
-            String num = String.valueOf(number);
-            x = num.concat(" and odd");
+            if(number > 60){
+                x = "Odd and over 60";
+            }
+            else{
+                x = num.concat(" and odd");
+            }
+
         }
 
         else{
@@ -41,10 +47,10 @@ public class ConditionalStatement {
                 x = "Even and equal to or under 25.";
             }
             else if(number <=60){
-                x = "Even and equal to or under 60.";
+                x = "Even";
             }
             else{
-                x = "Even and over 60.";
+                x = num.concat(" and even.");
             }
         }
 
