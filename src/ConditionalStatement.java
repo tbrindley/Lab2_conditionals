@@ -2,6 +2,7 @@ import java.util.Scanner;
 
 /**
  * Created by Travis Brindley on 6/26/2017.
+ * Assignment:  Creates multiple outputs based off branching.
  */
 
 public class ConditionalStatement {
@@ -20,10 +21,7 @@ public class ConditionalStatement {
         //checks if the number is divisible by 2
         boolean divByTwo = number % 2 == 0;
 
-        // returns a boolean response
-        Boolean oddEven = (divByTwo == true)? true:false;
-
-        return oddEven;
+        return divByTwo;
     }
     public static String numRange(int number, Boolean oddEven){
 
@@ -57,60 +55,51 @@ public class ConditionalStatement {
         return x;
     }
 
-    public static void main(String[] args) {
-
-        //variable declaration
+    public static String getName(){
         Scanner scnr = new Scanner(System.in);
-        char cont;
-
-        //welcome statement
         System.out.println("Lab 2:  Conditional Statements");
-
-        //collects username
         System.out.print("Welcome!  What is your name? ");
         String name = scnr.nextLine();
+        return name;
+    }
 
-        //creates a counter to change the input as it iterates through
-        int i = 1;
+    public static void main(String[] args) {
+        Scanner scnr = new Scanner(System.in);
+        String cont;
+        String name = getName();
 
-        //loops the process until user quits.
+        boolean firstTime = true;
+
         do{
-            //Gives a different prompt the first time through
-            if(i == 1) {
+            if(firstTime == true) {
                 System.out.printf("%s, please enter a whole number between 1 & 100:  ", name);
             }
             else{
                 System.out.printf("You know the routine %s, please enter a whole number between 1 & 100:  ", name);
             }
 
-            //if input isn't an integer, this while loop will continue until it is
-            while(!scnr.hasNextInt()) {
+            while(!scnr.hasNextInt()) {  //if input isn't an integer, this while loop will continue until it is
                 System.out.printf("I'm sorry %s, that isn't a valid integer. Please enter an integer between 1 & 100: ",name);
                 scnr.next();
             }
-
-            //inputs number
             int number = scnr.nextInt();
 
-            //ensures the number is between 1 & 100
-            number = Validate(scnr,number, name);
+            number = Validate(scnr,number, name); //ensures the number is between 1 & 100
 
-            //Gets odd or even status
-            Boolean oddEven = oddEven(number);
+            Boolean oddEven = oddEven(number);    //Gets odd or even status
 
-            // determines the number range
-            String numRange = numRange(number, oddEven);
+            String numRange = numRange(number, oddEven);  // determines the number range
 
-            // results output
-            System.out.println(numRange);
+            System.out.println(numRange); // results output
 
-            //repeats the loop as needed
+            scnr.nextLine(); //junk line because Java struggles switching between types
+
             System.out.print("Continue? Y/N: ");
-            cont = scnr.next().charAt(0);
+            cont = scnr.nextLine();
 
-            //adds a count
-            i += 1;
-        }while(cont == 'y' || cont == 'Y' );
+
+            firstTime = false;  //changes the first time condition
+        }while(cont.equalsIgnoreCase("y"));
 
         //exit line
         System.out.printf("goodbye %s, thanks for playing!",name);
